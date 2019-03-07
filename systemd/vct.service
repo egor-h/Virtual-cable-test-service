@@ -1,0 +1,7 @@
+[Unit]
+Description=Virtual cable test service
+After=network.target
+
+[Service]
+ExecStart=/usr/bin/java -jar /opt/vct.jar
+ExecStop=/bin/kill -s INT $MAINPID

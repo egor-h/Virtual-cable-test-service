@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+    <head th:replace="head_fragment :: head(~{::title})">
+        <title>VCT</title>
+    </head>
+
+    <body>
+        <div class="container">
+
+            <div th:replace="nav_bar :: navigation"></div>
+
+            <h1>VCT performed</h1>
+
+            <pre th:text="${vctResult}"></pre>
+        </div>
+    </body>
+</html>

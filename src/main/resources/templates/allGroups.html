@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head th:replace="head_fragment :: head(~{::title})">
+    <title>All hosts</title>
+</head>
+
+<body>
+<div th:replace="nav_bar :: navigation">
+
+</div>
+
+<div class="container">
+    <table class="table table-sm table-bordered">
+        <tr>
+            <th>Group name</th>
+        </tr>
+        <tr th:each="group : ${groups}">
+            <td>
+                <a th:href="'/hosts?grp=' + ${group.groupId}" th:text="${group.name}">Group</a>
+            </td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>

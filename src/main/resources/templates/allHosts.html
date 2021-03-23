@@ -14,15 +14,18 @@
             <table class="table table-sm table-bordered">
                 <tr>
                     <th>Hostname</th>
-                    <th>Group</th>
-                    <th>IP</th>
+<!--                    <th>Group</th>-->
+<!--                    <th>IP</th>-->
                     <th>Ports</th>
                 </tr>
                 <tr th:each="host : ${hosts}">
                     <td th:text="${host.name}">Host</td>
-                    <td th:text="${host.group}">Group</td>
-                    <td th:text="${host.ip} + ':' + ${host.port}">192.168.0.1:123</td>
-                    <td><a th:href="'ports?hostid=' + ${host.hostId}">Ports</a></td>
+<!--                    <td th:text="${host.group}">Group</td>-->
+                    <td th:each="addr : ${host.interfaces}">
+                        <a th:href="'ports?ip=' + ${addr.ip}" th:text="${addr.ip}">Port</a>
+                    </td>
+<!--                    <td th:text="${host.ip}">192.168.0.1:123</td>-->
+<!--                    <td><a th:href="'ports?hostid=' + ${host.hostId}">Ports</a></td>-->
                 </tr>
             </table>
 

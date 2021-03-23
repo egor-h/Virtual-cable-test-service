@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.w3.org/1999/xhtml">
 
     <head th:replace="head_fragment :: head(~{::title})">
-        <title th:text="'Ports on ' + ${host.ip} + '(id=' + ${host.hostId} + ')'"></title>
+        <title th:text="'Ports on ' + ${ip}"></title>
     </head>
 
     <body>
@@ -10,18 +10,17 @@
         <div th:replace="nav_bar :: navigation"></div>
 
         <div class="container">
-            <h1 th:text="${host.ip} + ' (' + ${host.hostId} + ')'"></h1>
+            <h1 th:text="${ip}"></h1>
             <table class="table table-sm table-bordered">
                 <tr>
                     <th>If idx</th>
                     <th>Name</th>
-                    <!--<th>IP</th>-->
                     <th>VCT</th>
                 </tr>
                 <tr th:each="i : ${iftable}">
                     <td th:text="${i.ifIndex}">0</td>
                     <td th:text="${i.ifDescr}">Ethernet0/1/0</td>
-                    <td><a th:href="'vct?hostid=' + ${host.hostId} + '&port=' + ${i.ifIndex}">VCT</a></td>
+                    <td><a th:href="'vct?ip=' + ${ip} + '&port=' + ${i.ifIndex}">VCT</a></td>
                 </tr>
             </table>
 

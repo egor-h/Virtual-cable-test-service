@@ -11,6 +11,10 @@ import java.util.stream.Collectors;
 public class GroupsResponse {
     List<Group> groups;
 
+    public List<Group> getGroups() {
+        return groups;
+    }
+
     @JsonProperty("result")
     private void setResult(List<Map<String, Object>> result) {
         groups = result.stream()

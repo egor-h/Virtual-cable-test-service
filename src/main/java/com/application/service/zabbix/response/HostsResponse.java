@@ -38,54 +38,6 @@ public class HostsResponse {
         }).collect(Collectors.toList());
     }
 
-//    public static class Result {
-//        private String hostId;
-//        private String host;
-//        private List<Interface> interfaces;
-//
-//        public Result(String hostId, String host, List<Interface> interfaces) {
-//            this.hostId = hostId;
-//            this.host = host;
-//            this.interfaces = interfaces;
-//        }
-//
-//        public Result() {
-//        }
-//
-//        @Override
-//        public String toString() {
-//            return "Result{" +
-//                    "hostId='" + hostId + '\'' +
-//                    ", host='" + host + '\'' +
-//                    ", interfaces=" + interfaces +
-//                    '}';
-//        }
-//
-//        public String getHostId() {
-//            return hostId;
-//        }
-//
-//        public void setHostId(String hostId) {
-//            this.hostId = hostId;
-//        }
-//
-//        public String getHost() {
-//            return host;
-//        }
-//
-//        public void setHost(String host) {
-//            this.host = host;
-//        }
-//
-//        public List<Interface> getInterfaces() {
-//            return interfaces;
-//        }
-//
-//        public void setInterfaces(List<Interface> interfaces) {
-//            this.interfaces = interfaces;
-//        }
-//    }
-
     private static class Host {
         private String hostId;
         private String host;

@@ -38,13 +38,13 @@ public class VirtualCableTestService {
         }
     }
 
-    public Collection<IfTableRow> getIfTable(Host host) throws RuntimeException {
-        logger.debug("Get if table from {}", host);
+    public Collection<IfTableRow> getIfTable(String ip) throws RuntimeException {
+        logger.debug("Get if table from {}", ip);
         SnmpUtil snmpUtil = new SnmpUtil(snmp);
         Collection<IfTableRow> ifTable = null;
 
         try {
-            ifTable = snmpUtil.getIfTable(host.getIp());
+            ifTable = snmpUtil.getIfTable(ip);
         } catch (Exception e) {
             logger.error("Error while retrieving ifTable {}", e);
             throw new RuntimeException(e);
@@ -55,20 +55,20 @@ public class VirtualCableTestService {
         return ifTable;
     }
 
-    public void startVCT(Host host, int physicalPort) throws RuntimeException {
+    public void startVCT(String ip, int physicalPort) throws RuntimeException {
         SnmpUtil snmpUtil = new SnmpUtil(snmp);
         try {
-            snmpUtil.startVCT(host.getIp(), physicalPort);
+            snmpUtil.startVCT(ip, physicalPort);
         } catch (Exception e) {
             logger.error("Error while sending VCT {}", e);
             throw new RuntimeException(e);
         }
     }
 
-    public String getVCT(Host host, int physicalPort) throws RuntimeException {
+    public String getVCT(String ip, int physicalPort) throws RuntimeException {
         SnmpUtil snmpUtil = new SnmpUtil(snmp);
         try {
-            return snmpUtil.getVCT(host.getIp(), physicalPort);
+            return snmpUtil.getVCT(ip, physicalPort);
         } catch (Exception e) {
             logger.error("Error while sending VCT {}", e);
             throw new RuntimeException(e);

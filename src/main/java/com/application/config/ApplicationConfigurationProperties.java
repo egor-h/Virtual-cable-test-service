@@ -12,7 +12,7 @@ public class ApplicationConfigurationProperties {
 //    @NestedConfigurationProperty
     private ZabbixConfiguration zabbix;
 
-    private static class ZabbixConfiguration {
+    public static class ZabbixConfiguration {
         private String username;
         private String password;
         private String url;

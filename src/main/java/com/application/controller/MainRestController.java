@@ -1,14 +1,10 @@
 package com.application.controller;
 
-import com.application.model.Host;
 import com.application.model.IfTableRow;
-import com.application.service.HostService;
 import com.application.service.VirtualCableTestService;
 import com.application.service.zabbix.ZabbixService;
 import com.application.service.zabbix.response.GroupsResponse;
 import com.application.service.zabbix.response.HostsResponse;
-import com.application.util.SnmpUtil;
-import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;

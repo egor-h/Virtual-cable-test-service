@@ -1,7 +1,5 @@
 package com.application.service;
 
-
-import com.application.model.Host;
 import com.application.model.IfTableRow;
 import com.application.util.SnmpUtil;
 import org.slf4j.Logger;

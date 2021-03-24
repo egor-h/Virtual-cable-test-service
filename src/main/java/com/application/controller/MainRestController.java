@@ -4,6 +4,9 @@ import com.application.model.Host;
 import com.application.model.IfTableRow;
 import com.application.service.HostService;
 import com.application.service.VirtualCableTestService;
+import com.application.service.zabbix.ZabbixService;
+import com.application.service.zabbix.response.GroupsResponse;
+import com.application.service.zabbix.response.HostsResponse;
 import com.application.util.SnmpUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -20,12 +23,12 @@ import java.util.List;
 @RequestMapping("/api/v1")
 public class MainRestController {
 
-    private HostService hostService;
+    private ZabbixService zabbixService;
     private VirtualCableTestService vct;
 
     @Autowired
-    public MainRestController(HostService hostService, VirtualCableTestService vct) {
-        this.hostService = hostService;
+    public MainRestController(ZabbixService zabbixService, VirtualCableTestService vct) {
+        this.zabbixService = zabbixService;
         this.vct = vct;
     }
 
@@ -34,17 +37,26 @@ public class MainRestController {
     })
     @ApiOperation("allHosts")
     @GetMapping("/host")
-    public List<Host> allHosts() {
-        return hostService.allHosts();
+    public List<HostsResponse.Host> allHosts() {
+        return zabbixService.hosts().getResult();
+    }
+
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Ok")
+    })
+    @ApiOperation("allGroups")
+    @GetMapping("/group")
+    public List<GroupsResponse.Group> allGroups() {
+        return zabbixService.groups().getGroups();
     }
 
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Ok"),
-            @ApiResponse(code = 404, message = "Host not found")
+            @ApiResponse(code = 404, message = "Group not found")
     })
-    @GetMapping("/host/{id}")
-    public Host host(@PathVariable("id") long id) {
-        return hostService.host(id);
+    @GetMapping("/group/{id}/host")
+    public List<HostsResponse.Host> hostsFromGroup(@PathVariable("id") long id) {
+        return zabbixService.hosts(String.valueOf(id)).getResult();
     }
 
 
@@ -54,20 +66,8 @@ public class MainRestController {
             @ApiResponse(code = 500, message = "Error on SNMP GET"),
     })
     @GetMapping("/ports")
-    public Collection<IfTableRow> ports(@RequestParam(value = "ip", required = false) String ip,
-                                  @RequestParam(value = "hostid", required = false) long hostid) {
-
-        Host host = null;
-
-        if (ip == null && hostid == 0) {
-            throw new RuntimeException("Required ip or hostid");
-        }
-
-        if (hostid != 0) {
-            host = hostService.host(hostid);
-        }
-
-        Collection<IfTableRow> ifTable = vct.getIfTable(host);
+    public Collection<IfTableRow> ports(@RequestParam(value = "ip") String ip) {
+        Collection<IfTableRow> ifTable = vct.getIfTable(ip);
 
         if (ifTable == null) {
             ifTable = new LinkedList();

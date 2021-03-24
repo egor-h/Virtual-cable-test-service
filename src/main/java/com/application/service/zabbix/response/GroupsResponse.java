@@ -22,7 +22,7 @@ public class GroupsResponse {
                 .collect(Collectors.toList());
     }
 
-    private class Group {
+    public class Group {
         private String groupId;
         private String name;
         private String internal;

@@ -38,7 +38,7 @@ public class HostsResponse {
         }).collect(Collectors.toList());
     }
 
-    private static class Host {
+    public static class Host {
         private String hostId;
         private String host;
         private String name;
@@ -97,7 +97,7 @@ public class HostsResponse {
         }
     }
 
-    private static class Interface {
+    public static class Interface {
         private String interfaceid;
         private String ip;
 

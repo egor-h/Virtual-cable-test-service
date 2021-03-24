@@ -6,8 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.datasource.DriverManagerDataSource;
+//import org.springframework.jdbc.core.JdbcTemplate;
+//import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
@@ -27,22 +27,6 @@ public class AppConfig {
 
     @Autowired
     private ApplicationConfigurationProperties applicationConfigurationProperties;
-
-    @Bean
-    public DataSource dataSource() {
-        logger.info("DataSource properties: {}", applicationConfigurationProperties);
-
-        DriverManagerDataSource dm = new DriverManagerDataSource(applicationConfigurationProperties.getDbUrl(),
-                applicationConfigurationProperties.getDbUser(),
-                applicationConfigurationProperties.getDbPassword());
-//        dm.setDriverClassName("org.mysql.cj.jdbc.Driver");
-        return dm;
-    }
-
-    @Bean()
-    public JdbcTemplate jdbcTemplate(DataSource dataSource) {
-        return new JdbcTemplate(dataSource);
-    }
 
     @Bean
     public Docket api() {

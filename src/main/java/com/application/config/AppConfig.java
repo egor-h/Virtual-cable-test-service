@@ -1,5 +1,8 @@
 package com.application.config;
 
+import io.micrometer.core.instrument.MeterRegistry;
+import io.micrometer.core.instrument.binder.jvm.JvmThreadMetrics;
+import io.micrometer.core.instrument.simple.SimpleMeterRegistry;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +31,16 @@ public class AppConfig {
     @Autowired
     private ApplicationConfigurationProperties applicationConfigurationProperties;
 
+//    @Bean
+//    JvmThreadMetrics jvmThreadMetrics() {
+//        return new JvmThreadMetrics();
+//    }
+
+    @Bean
+    MeterRegistry meterRegistry() {
+        return new SimpleMeterRegistry();
+    }
+    
     @Bean
     public Docket api() {
         return new Docket(DocumentationType.SWAGGER_2)

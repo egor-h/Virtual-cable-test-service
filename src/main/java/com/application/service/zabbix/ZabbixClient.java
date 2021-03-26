@@ -8,7 +8,6 @@ import org.springframework.web.client.RestTemplate;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
-@Component
 public class ZabbixClient {
     private static final Logger logger = LoggerFactory.getLogger(ZabbixClient.class);
 

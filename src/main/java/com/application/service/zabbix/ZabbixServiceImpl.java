@@ -8,6 +8,7 @@ import com.application.service.zabbix.response.HostsResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -21,17 +22,16 @@ public class ZabbixServiceImpl implements ZabbixService {
     private static final String ZABBIX_API = "/api_jsonrpc.php";
 
     private ApplicationConfigurationProperties config;
-    private RestTemplate rest;
+    private RestTemplate rest = new RestTemplate();
 
     private AtomicInteger requestId = new AtomicInteger(1);
     private String auth;
     private ZabbixClient zabbixClient;
 
     @Autowired
-    public ZabbixServiceImpl(ApplicationConfigurationProperties config, String auth, ZabbixClient zabbixClient) {
+    public ZabbixServiceImpl(ApplicationConfigurationProperties config) {
         this.config = config;
-        this.auth = auth;
-        this.zabbixClient = zabbixClient;
+        this.zabbixClient = new ZabbixClient(requestId, rest, ZABBIX_API);
     }
 
     @PostConstruct
